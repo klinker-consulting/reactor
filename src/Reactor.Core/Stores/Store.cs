@@ -2,21 +2,21 @@
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
 using Reactor.Core.Actions;
+using Reactor.Core.Dispatchers;
 using Reactor.Core.Reducers;
 
 namespace Reactor.Core.Stores
 {
     public class Store<TState>
     {
-        private readonly BehaviorSubject<IAction> _actions;
+        private readonly IActionDispatcher _dispatcher;
         private readonly BehaviorSubject<TState> _state;
 
-        public Store(IActionReducer<TState> rootReducer, TState initialState = default(TState))
+        public Store(IActionReducer<TState> rootReducer, IActionDispatcher dispatcher, TState initialState = default(TState))
         {
-            _actions = new BehaviorSubject<IAction>(new InitializeAction());
+            _dispatcher = dispatcher;
             _state = new BehaviorSubject<TState>(initialState);
-            _actions.Scan(initialState, rootReducer.Reduce)
-                .Subscribe(s => _state.OnNext(s));
+            _dispatcher.Scan(initialState, rootReducer).Subscribe(s => _state.OnNext(s));
         }
 
         public IDisposable Subscribe(System.Action<TState> subscriber)
@@ -31,7 +31,7 @@ namespace Reactor.Core.Stores
 
         public void Dispatch(IAction action)
         {
-            _actions.OnNext(action);
+            _dispatcher.Dispatch(action);
         }
     }
 }
