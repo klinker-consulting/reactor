@@ -1,0 +1,14 @@
+﻿<UserControl x:Class="Reactor.Ticker.Wpf.Symbols.Views.SymbolsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:cal="http://www.caliburnproject.org">
+    <Grid>
+            <ListView x:Name="Symbols" SelectedItem="{Binding SelectedSymbol, Mode=OneWay}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Button Content="{Binding}" cal:Message.Attach="SelectSymbol($dataContext)"/>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+    </Grid>
+</UserControl>

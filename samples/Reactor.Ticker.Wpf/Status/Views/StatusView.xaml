@@ -1,0 +1,10 @@
+﻿<UserControl x:Class="Reactor.Ticker.Wpf.Status.Views.StatusView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Grid>
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Text="Errors: " />
+            <TextBlock Text="{Binding ExceptionCount}" />
+        </StackPanel>
+    </Grid>
+</UserControl>

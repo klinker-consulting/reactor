@@ -1,0 +1,11 @@
+﻿<UserControl x:Class="Reactor.Ticker.Wpf.Symbols.Views.AddSymbolView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Grid>
+          <StackPanel Orientation="Horizontal">
+              <Label Content="Symbol:" />
+              <TextBox Width="250" Text="{Binding Symbol}" />
+              <Button x:Name="AddSymbol" Content="Add"/>
+          </StackPanel>  
+    </Grid>
+</UserControl>
